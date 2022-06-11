@@ -3,12 +3,12 @@ const morgan = require('morgan');
 const path = require('path');
 const app = express();
 const http = require('http');
-const port = 8000;
+// const port = 8000;
 require('dotenv').config()
 const cors = require('cors');
 const {Server} = require('socket.io');
 
-app.use(express.static(path.resolve(__dirname, '../client/build')));
+// app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 app.use(cors());
 
@@ -98,10 +98,14 @@ app.use('/users', usersRouter);
 app.use('/messages', messagesRouter);
 app.use('/rooms', roomsRouter);
 
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
-});
+const PORT = process.env.PORT || 8002
+if(process.env.NODE_ENV === 'production'){
+    app.use( express.static(__dirname + '/client/build'));
+    app.get('*', (request, response) => {
+	    response.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+    });
+}
 
-server.listen(port, () => {
-  console.log(`app is listening on port ${port}`);
+server.listen(PORT, () => {
+  console.log(`app is listening on port ${PORT}`);
 });
