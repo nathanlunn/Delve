@@ -1,10 +1,13 @@
 const express = require('express');
 const morgan = require('morgan');
+const path = require('path');
 const app = express();
 const http = require('http');
 const port = process.env.PORT || 8000;
 const cors = require('cors');
 const {Server} = require('socket.io');
+
+app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 app.use(cors());
 
@@ -93,6 +96,10 @@ app.use('/todos', todosRouter);
 app.use('/users', usersRouter);
 app.use('/messages', messagesRouter);
 app.use('/rooms', roomsRouter);
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+});
 
 server.listen(port, () => {
   console.log(`app is listening on port ${port}`);
