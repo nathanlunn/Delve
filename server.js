@@ -4,7 +4,7 @@ const path = require('path');
 const app = express();
 const http = require('http');
 // const port = 8000;
-require('dotenv').config()
+// require('dotenv').config()
 const cors = require('cors');
 const {Server} = require('socket.io');
 
