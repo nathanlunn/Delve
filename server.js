@@ -3,7 +3,7 @@ const morgan = require('morgan');
 const path = require('path');
 const app = express();
 const http = require('http');
-const port = process.env.PORT || 8000;
+const port = 8000;
 const cors = require('cors');
 const {Server} = require('socket.io');
 
