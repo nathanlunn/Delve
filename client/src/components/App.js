@@ -11,7 +11,12 @@ import Nav from './Nav';
 // STEP 1: import socket.io-client
 import io from 'socket.io-client';
 // STEP 2: make the connection
-const socket = io.connect('http://localhost:8000');
+const socketURL =
+  process.env.NODE_ENV === 'production'
+    ? window.location.hostname
+    : 'https://localhost:8000';
+
+const socket = io.connect(socketURL, {secure: true});
 
 // all listeners of socket.io we build will be inside of the useEffect
 
