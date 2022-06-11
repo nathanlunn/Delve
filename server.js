@@ -1,26 +1,39 @@
-const express = require('express');
-const morgan = require('morgan');
-const path = require('path');
-const app = express();
-const http = require('http');
-// const port = 8000;
+// my config/////////
+
+// const express = require('express');
+// const morgan = require('morgan');
+// const path = require('path');
+// const app = express();
+// const http = require('http');
+// // const port = 8000;
 // require('dotenv').config()
-const cors = require('cors');
-const {Server} = require('socket.io');
+// const cors = require('cors');
+// const {Server} = require('socket.io');
 
-// app.use(express.static(path.resolve(__dirname, '../client/build')));
+// // app.use(express.static(path.resolve(__dirname, '../client/build')));
 
-app.use(cors());
+// app.use(cors());
 
+// const server = http.createServer(app);
+
+// const io = new Server(server, {
+//   cors: {
+//     origin: "http://localhost:3002",
+//     credentials: true,
+//     methods: ["GET", "POST"],
+//   }
+// });
+
+// other persons config ///////
+const express = require("express");
+const http = require("http");
+const app = express();
 const server = http.createServer(app);
+const socket = require("socket.io");
+const io = socket(server);
+require ("dotenv").config();
+const path = require("path");
 
-const io = new Server(server, {
-  cors: {
-    origin: "https://delvetest.herokuapp.com/",
-    credentials: true,
-    methods: ["GET", "POST"],
-  }
-});
 
 io.on('connection', (socket) => {
   console.log("user connected", socket.id);
@@ -98,8 +111,8 @@ app.use('/users', usersRouter);
 app.use('/messages', messagesRouter);
 app.use('/rooms', roomsRouter);
 
-const PORT = process.env.PORT || 8002
-if(process.env.NODE_ENV === 'production'){
+const PORT = process.env.PORT || 8000
+if(process.env.NODE_ENV){
     app.use( express.static(__dirname + '/client/build'));
     app.get('*', (request, response) => {
 	    response.sendFile(path.join(__dirname, 'client/build', 'index.html'));
