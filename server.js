@@ -16,7 +16,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3002",
+    origin: "https://delvetest.herokuapp.com/",
     credentials: true,
     methods: ["GET", "POST"],
   }
