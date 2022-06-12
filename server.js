@@ -1,39 +1,39 @@
 // my config/////////
 
-// const express = require('express');
-// const morgan = require('morgan');
-// const path = require('path');
-// const app = express();
-// const http = require('http');
-// // const port = 8000;
-// require('dotenv').config()
-// const cors = require('cors');
-// const {Server} = require('socket.io');
-
-// // app.use(express.static(path.resolve(__dirname, '../client/build')));
-
-// app.use(cors());
-
-// const server = http.createServer(app);
-
-// const io = new Server(server, {
-//   cors: {
-//     origin: "http://localhost:3002",
-//     credentials: true,
-//     methods: ["GET", "POST"],
-//   }
-// });
-
-// other persons config ///////
-const express = require("express");
-const http = require("http");
-const app = express();
-const server = http.createServer(app);
-const socket = require("socket.io");
-const io = socket(server);
-require ("dotenv").config();
-const path = require("path");
+const express = require('express');
 const morgan = require('morgan');
+const path = require('path');
+const app = express();
+const http = require('http');
+// const port = 8000;
+require('dotenv').config()
+const cors = require('cors');
+const {Server} = require('socket.io');
+
+// app.use(express.static(path.resolve(__dirname, '../client/build')));
+
+app.use(cors());
+
+const server = http.createServer(app);
+
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:3002",
+    credentials: true,
+    methods: ["GET", "POST"],
+  }
+});
+'use strict';
+// other persons config ///////
+// const express = require("express");
+// const http = require("http");
+// const app = express();
+// const server = http.createServer(app);
+// const socket = require("socket.io");
+// const io = socket(server);
+// require ("dotenv").config();
+// const path = require("path");
+// const morgan = require('morgan');
 
 
 io.on('connection', (socket) => {

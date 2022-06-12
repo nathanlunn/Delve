@@ -14,7 +14,7 @@ import io from 'socket.io-client';
 const socketURL =
   process.env.NODE_ENV === 'production'
     ? window.location.hostname
-    : 'https://localhost:8000';
+    : 'http://localhost:8000';
 
 const socket = io.connect(socketURL, {secure: true});
 
